@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Example</title>
+    <script
+      src="https://kit.fontawesome.com/2081765cf8.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <style>
+    body {
+        font-family: 'Roboto';
+    }
+    </style>
+</style>
+  </head>
+  <body>
+    <div class="img-container">
+      <div class="search">
+        <h2 class="heading">Got a question?</h2>
+        <h2 class="heading">Get your answer.</h2>
+        <p>
+          Curious about MLSC KARE student chapter? Ask us anything about our
+          terms and conditions and get factual responses.
+        </p>
+        <div id="search-container">
+          <input type="text" id="search-input" placeholder="Search..." />
+          <i class="fa-brands fa-searchengin"></i>
+        </div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <div id="results-container" class="row">
+      <div class="result-container">
+        <h3>How to join MLSC ? (Microsoft Student Learn Chapter)</h3>
+        <p>
+          There will be two rounds.First round is quiz that will be conducted on
+          basics of Microsoft tools and second round is interview where student
+          will be evaluated by their professional skills and projects.
+          <br />
+          <b>Note*</b> you need to be qualified in round 1 in order to
+          participate in round 2
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>Are there any requirements for maintaining the membership ?</h3>
+        <p>
+          Individually have to involve in every activity planned by MLSC.Active
+          participation is most encouraged. Team work for contribution towards
+          chapter success
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>How do I become Microsoft Learn Student Ambassador ?</h3>
+        <p>
+          Have a look briefly in the below provided link
+          <a href="../Get_started.pdf">Click here</a>
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>How can the chapter support my academic and profession goals ?</h3>
+        <p>
+          Helps in becoming Student Ambassador leads to lifetime access of
+          Microsoft tools.Helps in giving guidelines where students work with
+          the Microsoft tools. Chapter also offers vouchers for attempting
+          certified Microsoft exams. make it a professional script
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>What types of event does the chapter organize ?</h3>
+        <p>
+          Webinars, Hackathons, Workshops, Coding challenges that enhances the
+          students skills and also students can claim certificates in
+          recognition for participation.
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>Benifits of joining Mlsc ?</h3>
+        <p>
+          These sessions enhance your skills and prepare you for real-world
+          challenges.You'll gain access to Microsoft's extensive learning
+          resources.MLSC participation adds value to your resume
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>What types of content are available on Microsoft Learn ?</h3>
+        <p>
+          Microsoft Learn provides role and product-focused documentation,
+          hands-on training, and certifications to help you get the most out of
+          Microsoft products
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>Is there a membership fee to join MLSC ?</h3>
+        <p>
+          No, after Interview selection process, the particular individual will
+          be considered as the core member. Then you will be recognized as a
+          recognized MLSC core member.
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>How can I participate in chapter Activities ?</h3>
+        <p>
+          ACM Student chapter will be posting the details of the event along
+          with the poster which includes the QR Code for registration and the
+          registered students will be updated through email.Also students will
+          be often reminded about the deadline of the event.
+        </p>
+      </div>
+      <div class="result-container">
+        <h3>How can I get involved in leadership Activities ?</h3>
+        <p>
+          Core members of MLSC Chapter of their respective domain must show
+          active participation in every event conducted by the chapter and you
+          should engage more. Taking suggestions from the mentors of the MLSC
+          chapter can help you too..
+        </p>
+      </div>
+    </div>
+    <div class="form-redirect">
+      <a
+        type="submit"
+        href="form.html"
+        class="form-link"
+        title="Click Here"
+        >Still not clarified?</a
+      >
+    </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      ScrollReveal({
+        distance: "80px",
+        duration: 2000,
+        delay: 200,
+      });
+      ScrollReveal().reveal(".img-container,.form-redirect", {
+        origin: "top",
+      });
+      ScrollReveal().reveal(".heading,.img-container p", {
+        origin: "left",
+      });
+      ScrollReveal().reveal("#search-container,.row", {
+        origin: "right",
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("search-input");
+        const resultContainers = document.querySelectorAll(".result-container");
+        function filterResults(searchTerm) {
+          const lowerSearchTerm = searchTerm.toLowerCase();
+          resultContainers.forEach((resultContainer) => {
+            const content = resultContainer.textContent.toLowerCase();
+            if (content.includes(lowerSearchTerm)) {
+              resultContainer.style.display = "block";
+            } else {
+              resultContainer.style.display = "none";
+            }
+          });
+        }
+        searchInput.addEventListener("input", function () {
+          const searchTerm = searchInput.value;
+          filterResults(searchTerm);
+        });
+      });
+    </script>
+    <script>
+      var resultContainers =
+        document.getElementsByClassName("result-container");
+      for (var i = 0; i < resultContainers.length; i++) {
+        resultContainers[i].addEventListener("click", function () {
+          var paragraph = this.querySelector("p");
+          paragraph.classList.toggle("show");
+          if (paragraph.classList.contains("show")) {
+            this.style.height = "auto";
+          } else {
+            this.style.height = "50px";
+          }
+          for (var j = 0; j < resultContainers.length; j++) {
+            var otherParagraph = resultContainers[j].querySelector("p");
+            if (otherParagraph !== this.querySelector("p")) {
+              otherParagraph.classList.remove("show");
+              resultContainers[j].style.height = "50px";
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

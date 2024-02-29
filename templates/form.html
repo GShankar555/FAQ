@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/form.css">
+    <script src="https://kit.fontawesome.com/2081765cf8.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <style>
+    body {
+        font-family: 'Roboto';
+    }
+    </style>
+    <title>FAQ</title>
+</head>
+<body onload="clear()">
+    <div class="container">
+        <img id="left" src="../static/left.jpeg" alt="left">
+        <img id="right" src="../static/right.jpeg" alt="right">
+        <form id="myForm" method="post" action="/submit" onsubmit="submitForm(event)">
+            <h2 class="heading">FAQ Form</h2>
+            <br>
+            <label for="fname">First Name<i class="fa-solid fa-star-of-life"></i></label>
+            <input type="text" name="fname" placeholder="Enter First Name" required>
+            <label for="lname">Last Name<i class="fa-solid fa-star-of-life"></i></label>
+            <input type="text" name="lname" placeholder="Enter Last Name" required>
+            <div class="labels">
+                <label for="dept">Department<i class="fa-solid fa-star-of-life"></i></label>
+                <label for="year">Year<i class="fa-solid fa-star-of-life"></i></label></label>
+            </div>
+            <div class="inputs">
+                <input type="text" name="dept" placeholder="Enter Department Name" required>
+                <select name="year" required>
+                    <option value="1">I</option>
+                    <option value="2" selected>II</option>
+                    <option value="3">III</option>
+                    <option value="4">IV</option>
+                </select>
+            </div>
+            <label for="mobile">Mobile No<i class="fa-solid fa-star-of-life"></i></label>
+            <input type="text" name="mobile" placeholder="Enter Mobile Number" required>
+            <label for="email">Email<i class="fa-solid fa-star-of-life"></i></label>
+            <input type="text" placeholder="Email" name="email" required>
+            <label for="faq">Enter your question<i class="fa-solid fa-star-of-life"></i></label>
+            <textarea name="faq" id="faqTextarea" cols="10" rows="10" placeholder="Enter your query"></textarea>
+            <br>
+            <button class="btn" onclick="popup()" type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="popup" id="popup">
+        <img src="../static/tick.png" alt="tick">
+        <h1>Thank you!!!</h1>
+        <p>Your details have been submitted sucessfully.</p>
+        <button type="button" onclick="closePop()">OK</button>
+    </div>
+</body>
+<script src="https://unpkg.com/scrollreveal"></script>
+<script>
+    ScrollReveal({
+            distance: "30px",
+            duration: 6000,
+        });
+        ScrollReveal().reveal("#myForm,.heading", { origin: "top" });
+        ScrollReveal().reveal("form label", {
+        origin: "left",
+        });
+        ScrollReveal().reveal("form input", {
+        origin: "right",
+    });
+</script>
+<script>
+    let pop = document.getElementById("popup");
+    let form = document.getElementsByClassName("container")[0];
+    let data = document.querySelectorAll("input");
+    function popup(e) {
+        for(var i=0;i<data.length;i++) {
+            if(data[i].value == "") {
+                return;
+            }
+        }
+        pop.classList.add("open-popup");
+        form.style.opacity = "0.3";
+    }
+    function closePop() {
+        pop.classList.remove("open-popup");
+        form.style.opacity = "1";
+    }
+</script>
+<script>
+    function clear() {
+        document.getElementById('myForm').reset();
+    }
+</script>
+<script>
+    function submitForm(event) {
+        event.preventDefault();
+        let formData = new FormData(document.getElementById('myForm'));
+        fetch('/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('myForm').reset();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+</script>
+</html>
